@@ -1,0 +1,10 @@
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Mfigu\TmdbCliTool\Command\GetMoviesCommand;
+
+$application = new Application('TMDB CLI Tool', '1.0.0');
+$application->add(new GetMoviesCommand());
+$application->run();
