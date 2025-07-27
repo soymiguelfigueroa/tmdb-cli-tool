@@ -1,0 +1,17 @@
+{
+    "name": "mfigu/tmdb-cli-tool",
+    "description": "Use TMDB API to fetch movie information and display it in the terminal.",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mfigu\\TmdbCliTool\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Miguel Figueroa",
+            "email": "miguelfigueroa90@gmail.com"
+        }
+    ]
+}
