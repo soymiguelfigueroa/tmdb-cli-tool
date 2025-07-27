@@ -13,5 +13,8 @@
             "name": "Miguel Figueroa",
             "email": "miguelfigueroa90@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    }
 }
