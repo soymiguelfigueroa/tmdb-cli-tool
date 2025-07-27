@@ -7,6 +7,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Mfigu\TmdbCliTool\Classes\Movies;
 
 #[AsCommand(
     name: 'get:movies',
@@ -27,27 +28,19 @@ class GetMoviesCommand extends Command
 
     public function __invoke(InputInterface $input, OutputInterface $output): int
     {
-        switch ($input->getOption('type')) {
-            case 'playing':
-                $output->writeln('Fetching currently playing movies...');
-                break;
-            
-            case 'popular':
-                $output->writeln('Fetching popular movies...');
-                break;
+        $type = $input->getOption('type');
 
-            case 'top':
-                $output->writeln('Fetching top movies...');
-                break;
-
-            case 'upcoming':
-                $output->writeln('Fetching upcoming movies...');
-                break;
-            
-            default:
-                $output->writeln('Invalid type specified. Please use playing, popular, top, or upcoming.');
-                return Command::FAILURE;
+        if (!$type) {
+            $output->writeln('<error>Please specify a type using --type option.</error>');
+            return Command::FAILURE;
         }
+
+        $output->writeln('Fetching currently playing movies...');
+        $movies = Movies::getMovies($type);
+        foreach ($movies['data']['results'] as $movie) {
+            $output->writeln("Title: {$movie['title']}, Release Date: {$movie['release_date']}");
+        }
+        $output->writeln($movies['status_message']);
         return Command::SUCCESS;
     }
 }
